@@ -30,7 +30,7 @@ ul {
 }
 
 textarea {
-    width: 400px;
+    width: min(100%, 480px);
 }
 
 .loading {
