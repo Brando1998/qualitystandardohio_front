@@ -21,7 +21,7 @@ export class ClientRequestServiceResumeComponent implements OnInit {
   step4: any;
   step5: any;
   formData: any;
-  stripeUrl: any;
+  stripeUrl: any = false;
   isLoading = false;
   servicePrice = 0;
 
@@ -91,7 +91,7 @@ export class ClientRequestServiceResumeComponent implements OnInit {
       phone: data.phone,
       address: data.address,
       accept_terms: data.acceptTerms, // Cambia a snake_case
-      notes: data.notes
+      notes: this.step6Form.controls.notes.value
     };
     return transformedData;
   }
@@ -102,7 +102,7 @@ export class ClientRequestServiceResumeComponent implements OnInit {
     this.clientService.placeOrder(this.formData).subscribe({
       next: (r) => {
         console.log('Order response:', r);
-        this.stripeUrl = r.url;
+        this.stripeUrl = r.setup_url;
         this.isLoading = false; 
       },
       error: (e) => {

@@ -4,7 +4,8 @@
             price and according to your real needs.</span>
     </div>
     <div class="d-flex justify-content-evenly align-items-center flex-wrap">
-        <button [ngClass]="{'active': selectedType === 'apartment'}" class="tab-button" (click)="selectType('apartment')">
+        <button [ngClass]="{'active': selectedType === 'apartment'}" class="tab-button"
+            (click)="selectType('apartment')">
             <img src="/icons/apartment.svg" alt="apartment icon">
             <div>Apartment or
                 studio</div>
@@ -16,12 +17,21 @@
     </div>
     <form [formGroup]="step3Form">
         <div class="form-title">Number of rooms</div>
+
         <div class="form-group">
-            <input type="number" name="bedrooms" id="bedrooms" formControlName="bedroomsNumber">
+            <select name="bedrooms" id="bedrooms" formControlName="bedroomsNumber">
+                <option *ngFor="let option of bedroomsOptions" [value]="option">
+                    {{ option }}
+                </option>
+            </select>
             <label for="bedrooms">Bedrooms number</label>
         </div>
         <div class="form-group">
-            <input type="number" name="bathrooms" id="bathrooms" formControlName="bathroomsNumber">
+            <select name="bathrooms" id="bathrooms" formControlName="bathroomsNumber">
+                <option *ngFor="let option of bathroomsOptions" [value]="option">
+                    {{ option }}
+                </option>
+            </select>
             <label for="bathrooms">Bathrooms number</label>
         </div>
     </form>
