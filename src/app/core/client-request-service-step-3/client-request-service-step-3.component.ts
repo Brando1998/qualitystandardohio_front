@@ -1,4 +1,4 @@
-import { CurrencyPipe, NgClass, NgFor } from '@angular/common';
+import { CurrencyPipe, NgClass, NgFor, NgIf } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators, ValidationErrors, ValidatorFn, AbstractControl } from '@angular/forms';
 
@@ -19,7 +19,7 @@ export function atLeastOneNonZero(): ValidatorFn {
 @Component({
   selector: 'app-client-request-service-step-3',
   standalone: true,
-  imports: [ReactiveFormsModule, NgClass, CurrencyPipe, NgFor],
+  imports: [ReactiveFormsModule, NgClass, CurrencyPipe, NgFor, NgIf],
   templateUrl: './client-request-service-step-3.component.html',
   styleUrls: ['./client-request-service-step-3.component.css']
 })
@@ -66,12 +66,15 @@ export class ClientRequestServiceStep3Component {
   updateOptions() {
     const typeOfConstruction = this.step3Form.controls.typeOfConstruction.value;
 
-    if (typeOfConstruction === 'apartment') {
+    if (typeOfConstruction === 'small') {
       this.bathroomsOptions = ['1']; // Solo la opción 1 para baños
       this.bedroomsOptions = ['1', '2']; // Solo las primeras dos opciones para habitaciones
-    } else if (typeOfConstruction === 'familiar') {
-      this.bathroomsOptions = ['1', '2', '+2']; // Todas las opciones para baños
-      this.bedroomsOptions = ['1', '2', '3', '+3']; // Todas las opciones para habitaciones
+    } else if (typeOfConstruction === 'medium') {
+      this.bathroomsOptions = ['1', '2']; // Todas las opciones para baños
+      this.bedroomsOptions = ['2', '3']; // Todas las opciones para habitaciones
+    } else if (typeOfConstruction === 'large') {
+      this.bathroomsOptions = ['+2']; // Todas las opciones para baños
+      this.bedroomsOptions = ['+3']; // Todas las opciones para habitaciones
     } else {
       this.bathroomsOptions = [];
       this.bedroomsOptions = [];
@@ -86,25 +89,24 @@ export class ClientRequestServiceStep3Component {
     const bedroomsNumber = formValue.bedroomsNumber?.toString() || '';
     const bathroomsNumber = formValue.bathroomsNumber?.toString() || '';
   
-    // Nuevo ajuste: Si cualquier campo tiene '+3' o '+2', el precio es 170
-    if (bedroomsNumber === '+3' || bathroomsNumber === '+2') {
-      this.servicePrice = 170;
-      return; // Salimos de la función porque ya sabemos el precio
-    }
-  
     // Resto de las condiciones
     if (
-      typeOfConstruction === 'apartment' &&
+      typeOfConstruction === 'small' &&
       (bedroomsNumber === '0' || bedroomsNumber === '1' || bedroomsNumber === '2') &&
       (bathroomsNumber === '0' || bathroomsNumber === '1')
     ) {
       this.servicePrice = 130;  
     } else if (
-      typeOfConstruction === 'familiar' &&
+      typeOfConstruction === 'medium' &&
       (bedroomsNumber === '2' || bedroomsNumber === '3') &&
       (bathroomsNumber === '0' || bathroomsNumber === '1' || bathroomsNumber === '2')
     ) {
       this.servicePrice = 150;
+    } else if (
+      typeOfConstruction === 'large' &&
+      (bedroomsNumber === '+3' || bedroomsNumber === '+2')
+    ) {
+      this.servicePrice = 170;
     } else {
       this.servicePrice = 0; // Valor por defecto si no cumple ninguna condición
     }

@@ -51,4 +51,8 @@ export class ClientRequestServiceStep4Component {
       this.nextStep.emit(this.step4Form.value);
     }
   }
+
+  skip() {
+    this.nextStep.emit(this.step4Form.value);
+  }
 }

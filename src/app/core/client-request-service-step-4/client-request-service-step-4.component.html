@@ -81,12 +81,49 @@
             </svg>
             <div>Inside oven</div>
         </button>
+        <button class="tab-button"
+            [ngClass]="{'active': step4Form.controls.extraServices.value?.includes('furniture')}"
+            (click)="updateExtraServices('furniture')">
+            <svg width="64px" height="64px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="#0B4D2D">
+                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                <g id="SVGRepo_iconCarrier">
+                    <defs>
+                        <style>
+                            .cls-1,
+                            .cls-2 {
+                                fill: none;
+                                stroke: #0B4D2D;
+                                stroke-linecap: round;
+                                stroke-linejoin: round;
+                                stroke-width: 1.5px;
+                            }
+
+                            .cls-1 {
+                                fill-rule: evenodd;
+                            }
+                        </style>
+                    </defs>
+                    <g id="ic-furniture-chair">
+                        <path class="cls-1"
+                            d="M19,19.94H5a2,2,0,0,1-2-2v-3H3a22.21,22.21,0,0,1,18,0h0v3A2,2,0,0,1,19,19.94Z"></path>
+                        <path class="cls-1" d="M3,14.94V12.52a3,3,0,0,1,3-3H6a3,3,0,0,1,3,3v.72"></path>
+                        <path class="cls-1" d="M21,14.94V12.52a3,3,0,0,0-3-3h0a3,3,0,0,0-3,3v.72"></path>
+                        <path class="cls-1" d="M5,9.69V3.94H5a14,14,0,0,1,13.84-.09l.16.09V9.66"></path>
+                        <line class="cls-2" x1="6" y1="19.94" x2="6" y2="21.94"></line>
+                        <line class="cls-2" x1="18" y1="19.94" x2="18" y2="21.94"></line>
+                    </g>
+                </g>
+            </svg>
+            <div>Furniture</div>
+        </button>
     </div>
     <div class="price">
         <h2>Extra price</h2>
         <h3>{{extraPrice|currency}}</h3>
     </div>
-    <div class="d-flex align-items-center justify-content-center button-container">
-        <button [disabled]="step4Form.invalid" class="next-step" (click)="onNextStep()">Next step</button>
+    <div class="d-flex flex-wrap align-items-center justify-content-between button-container">
+        <button [disabled]="step4Form.invalid" class="next-step" (click)="skip()">Skip</button>
+        <button style="margin-top: 1rem;" [disabled]="step4Form.invalid" class="next-step" (click)="onNextStep()">Next step</button>
     </div>
 </section>
