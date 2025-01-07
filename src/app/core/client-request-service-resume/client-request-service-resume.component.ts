@@ -99,11 +99,13 @@ export class ClientRequestServiceResumeComponent implements OnInit {
   placeOrder() {
     this.isLoading = true;
     console.log("Placing order...");
+    console.log(this.formData)
     this.clientService.placeOrder(this.formData).subscribe({
       next: (r) => {
         console.log('Order response:', r);
         this.stripeUrl = r.setup_url;
         this.isLoading = false; 
+        this.redirectToStripe()
       },
       error: (e) => {
         console.error('Order error:', e);
@@ -117,36 +119,30 @@ export class ClientRequestServiceResumeComponent implements OnInit {
     console.log(formValue)
 
     const typeOfConstruction = formValue.typeOfConstruction;
-    const bedroomsNumber = parseInt(formValue.bedroomsNumber || '0', 10);
-    const bathroomsNumber = parseInt(formValue.bathroomsNumber || '0', 10);
 
-    if (
-      typeOfConstruction === 'apartment' &&
-      bedroomsNumber >= 0 && bedroomsNumber <= 2 &&
-      (bathroomsNumber === 0 || bathroomsNumber === 1)
-    ) {
-      this.servicePrice = 130;
-    } else if (
-      typeOfConstruction === 'familiar' &&
-      bedroomsNumber >= 2 && bedroomsNumber <= 3 &&
-      bathroomsNumber >= 1 && bathroomsNumber <= 2
-    ) {
-      this.servicePrice = 150;
-    } else if (
-      typeOfConstruction === 'familiar' &&
-      bedroomsNumber > 3 &&
-      bathroomsNumber > 2
-    ) {
-      this.servicePrice = 170;
+    if (typeOfConstruction === 'studio') {
+      this.servicePrice = 100;
+    } else if (typeOfConstruction === 'small') {
+      this.servicePrice = 120;
+    } else if (typeOfConstruction === 'medium') {
+      this.servicePrice = 140;
+    } else if (typeOfConstruction === 'large') {
+      this.servicePrice = 160; // Valor por defecto si no cumple ninguna condición
     } else {
-      this.servicePrice = 0; // Valor por defecto si no cumple ninguna condición
+      this.servicePrice = 0;
     }
 
     const servicesArray = this.step3.extraServices;
     this.servicePrice = ((servicesArray?.length || 0) * 25) + this.servicePrice;
   }
 
-  // updateExtraPrice(services: string[] | null) {
-  //   this.extraPrice = (services?.length || 0) * 25; // Multiplica el número de servicios por 25
-  // }
+  redirectToStripe() {
+    setTimeout(() => {
+      if (this.stripeUrl) {
+        window.location.href = this.stripeUrl;
+      } else {
+        console.error("stripeUrl no está definido");
+      }
+    }, 2000);
+  }
 }

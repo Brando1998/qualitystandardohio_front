@@ -4,52 +4,37 @@
             price and according to your real needs.</span>
     </div>
     <div class="d-flex justify-content-evenly align-items-center flex-wrap">
-        <button [ngClass]="{'active': selectedType === 'small'}" class="tab-button"
-            (click)="selectType('small')">
+        <button [ngClass]="{'active': selectedType === 'studio'}" class="tab-button" (click)="selectType('studio',1,1)">
             <img src="/icons/apartment.svg" alt="small icon">
-            <div>Small Home</div>
+            <div>1 room / 1 bath</div>
         </button>
-        <button [ngClass]="{'active': selectedType === 'medium'}" class="tab-button" (click)="selectType('medium')">
+        <button [ngClass]="{'active': selectedType === 'small'}" class="tab-button" (click)="selectType('small',2,1)">
+            <img src="/icons/apartment.svg" alt="small icon">
+            <div>2 rooms / 1 bath</div>
+        </button>
+        <button [ngClass]="{'active': selectedType === 'medium'}" class="tab-button" (click)="selectType('medium',2,2)">
             <img src="/icons/house.svg" alt="medium icon">
-            <div>Medium Home</div>
+            <div>2 rooms / 2 bath</div>
         </button>
-        <button [ngClass]="{'active': selectedType === 'large'}" class="tab-button" (click)="selectType('large')">
-            <img src="/icons/mansion.svg" alt="large icon">
-            <div>Large Home</div>
+        <button [ngClass]="{'active': selectedType === 'large'}" class="tab-button" (click)="selectType('large',3,2)">
+            <img src="/icons/house.svg" alt="large icon">
+            <div>2 rooms / 2 bath</div>
         </button>
-        <button [ngClass]="{'active': selectedType === 'commercial'}" class="tab-button" (click)="selectType('commercial')">
+        <button [ngClass]="{'active': selectedType === 'custom'}" class="tab-button" (click)="selectType('custom',0,0)">
             <img src="/icons/commercial.svg" alt="commercial icon">
-            <div>Commercial</div>
+            <div>Large Home and Commercial</div>
         </button>
     </div>
-    <form [formGroup]="step3Form" *ngIf="selectedType !== 'commercial'">
-        <div class="form-title">Number of rooms</div>
-
-        <div class="form-group">
-            <select name="bedrooms" id="bedrooms" formControlName="bedroomsNumber">
-                <option *ngFor="let option of bedroomsOptions" [value]="option">
-                    {{ option }}
-                </option>
-            </select>
-            <label for="bedrooms">Bedrooms number</label>
-        </div>
-        <div class="form-group">
-            <select name="bathrooms" id="bathrooms" formControlName="bathroomsNumber">
-                <option *ngFor="let option of bathroomsOptions" [value]="option">
-                    {{ option }}
-                </option>
-            </select>
-            <label for="bathrooms">Bathrooms number</label>
-        </div>
-    </form>
-    <div class="price" *ngIf="selectedType !== 'commercial'">
+    <div class="price" *ngIf="selectedType !== 'custom'">
         <h2>Service price</h2>
         <h3>{{servicePrice | currency}}</h3>
     </div>
-    <div class="d-flex align-items-center justify-content-center button-container" *ngIf="selectedType !== 'commercial'">
+    <div class="d-flex align-items-center justify-content-center button-container"
+        *ngIf="selectedType !== 'custom'">
         <button [disabled]="step3Form.invalid" class="next-step" (click)="onNextStep()">Next step</button>
     </div>
-    <div class="d-flex align-items-center justify-content-center button-container" *ngIf="selectedType === 'commercial'">
+    <div class="d-flex align-items-center justify-content-center button-container"
+        *ngIf="selectedType === 'custom'">
         <a class="contact" href="https://qualitystandardohio.com/contact">Contact us</a>
     </div>
 </section>

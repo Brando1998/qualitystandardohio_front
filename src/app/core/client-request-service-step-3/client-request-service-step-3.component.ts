@@ -33,27 +33,24 @@ export class ClientRequestServiceStep3Component {
 
   step3Form = new FormGroup({
     typeOfConstruction: new FormControl('', Validators.required),
-    bedroomsNumber: new FormControl('0', Validators.required),
-    bathroomsNumber: new FormControl('0', Validators.required),
+    bedroomsNumber: new FormControl(0, Validators.required),
+    bathroomsNumber: new FormControl(0, Validators.required),
   },
-  { validators: atLeastOneNonZero() });
+    { validators: atLeastOneNonZero() });
 
   ngOnInit(): void {
-    // Suscribirse a los cambios del formulario
-    this.step3Form.valueChanges.subscribe(() => {
-      this.updateServicePrice();
-      this.updateOptions();
-    });
-
     if (this.stepData) {
       const stepData = JSON.parse(this.stepData);
       this.normalizeDataForForm(stepData); // Convertir valores numéricos a cadenas
     }
   }
 
-  selectType(type: string) {
+  selectType(type: string, room: number, bath: number) {
     this.selectedType = type;
     this.step3Form.controls.typeOfConstruction.setValue(type);
+    this.step3Form.controls.bedroomsNumber.setValue(room);
+    this.step3Form.controls.bathroomsNumber.setValue(bath);
+    this.updateServicePrice()
   }
 
   onNextStep() {
@@ -63,59 +60,33 @@ export class ClientRequestServiceStep3Component {
     }
   }
 
-  updateOptions() {
-    const typeOfConstruction = this.step3Form.controls.typeOfConstruction.value;
-
-    if (typeOfConstruction === 'small') {
-      this.bathroomsOptions = ['1']; // Solo la opción 1 para baños
-      this.bedroomsOptions = ['1', '2']; // Solo las primeras dos opciones para habitaciones
-    } else if (typeOfConstruction === 'medium') {
-      this.bathroomsOptions = ['1', '2']; // Todas las opciones para baños
-      this.bedroomsOptions = ['2', '3']; // Todas las opciones para habitaciones
-    } else if (typeOfConstruction === 'large') {
-      this.bathroomsOptions = ['+2']; // Todas las opciones para baños
-      this.bedroomsOptions = ['+3']; // Todas las opciones para habitaciones
-    } else {
-      this.bathroomsOptions = [];
-      this.bedroomsOptions = [];
-    }
-  }
-
   private updateServicePrice() {
     const formValue = this.step3Form.value;
-  
-    // Aseguramos que los valores sean cadenas
-    const typeOfConstruction = formValue.typeOfConstruction || '';
-    const bedroomsNumber = formValue.bedroomsNumber?.toString() || '';
-    const bathroomsNumber = formValue.bathroomsNumber?.toString() || '';
-  
+
+    const bedroomsNumber = formValue.bedroomsNumber;
+    const bathroomsNumber = formValue.bathroomsNumber;
+
     // Resto de las condiciones
-    if (
-      typeOfConstruction === 'small' &&
-      (bedroomsNumber === '0' || bedroomsNumber === '1' || bedroomsNumber === '2') &&
-      (bathroomsNumber === '0' || bathroomsNumber === '1')
-    ) {
-      this.servicePrice = 130;  
-    } else if (
-      typeOfConstruction === 'medium' &&
-      (bedroomsNumber === '2' || bedroomsNumber === '3') &&
-      (bathroomsNumber === '0' || bathroomsNumber === '1' || bathroomsNumber === '2')
-    ) {
-      this.servicePrice = 150;
-    } else if (
-      typeOfConstruction === 'large' &&
-      (bedroomsNumber === '+3' || bedroomsNumber === '+2')
-    ) {
-      this.servicePrice = 170;
+    if ((bedroomsNumber === 1) && (bathroomsNumber === 1)) {
+      this.servicePrice = 100;
+    } else if ((bedroomsNumber === 2) && (bathroomsNumber === 1)) {
+      console.log("2+1")
+      this.servicePrice = 120;
+    } else if ((bedroomsNumber === 2) && (bathroomsNumber === 2)) {
+      console.log("2+2")
+      this.servicePrice = 140;
+    } else if ((bedroomsNumber === 3) && (bathroomsNumber === 2)) {
+      console.log("3+2")
+      this.servicePrice = 160;
     } else {
       this.servicePrice = 0; // Valor por defecto si no cumple ninguna condición
     }
   }
-  
+
 
   private normalizeDataForForm(stepData: any) {
-    const bedroomsNumber = stepData.bedroomsNumber === 4 ? '+3' : stepData.bedroomsNumber.toString();
-    const bathroomsNumber = stepData.bathroomsNumber === 4 ? '+2' : stepData.bathroomsNumber.toString();
+    const bedroomsNumber = stepData.bedroomsNumber;
+    const bathroomsNumber = stepData.bathroomsNumber;
 
     this.step3Form.patchValue({
       typeOfConstruction: stepData.typeOfConstruction,
@@ -124,11 +95,13 @@ export class ClientRequestServiceStep3Component {
     });
 
     this.selectedType = stepData.typeOfConstruction;
+    this.updateServicePrice();
+
   }
 
   private normalizeDataForBackend(formValue: any) {
-    const bedroomsNumber = formValue.bedroomsNumber === '+3' ? 4 : parseInt(formValue.bedroomsNumber || '0', 10);
-    const bathroomsNumber = formValue.bathroomsNumber === '+2' ? 4 : parseInt(formValue.bathroomsNumber || '0', 10);
+    const bedroomsNumber = formValue.bedroomsNumber;
+    const bathroomsNumber = formValue.bathroomsNumber;
 
     return {
       typeOfConstruction: formValue.typeOfConstruction,

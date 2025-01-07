@@ -123,7 +123,7 @@
         <h3>{{extraPrice|currency}}</h3>
     </div>
     <div class="d-flex flex-wrap align-items-center justify-content-between button-container">
-        <button [disabled]="step4Form.invalid" class="next-step" (click)="skip()">Skip</button>
+        <button class="next-step" (click)="skip()">Skip</button>
         <button style="margin-top: 1rem;" [disabled]="step4Form.invalid" class="next-step" (click)="onNextStep()">Next step</button>
     </div>
 </section>
