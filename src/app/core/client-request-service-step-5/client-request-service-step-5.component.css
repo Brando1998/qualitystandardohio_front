@@ -43,3 +43,7 @@
   fill: var(--secondary-green);
   /* fill: var(--primary-green); */
 }
+
+.font_big {
+  font-size: 1.5rem;
+}

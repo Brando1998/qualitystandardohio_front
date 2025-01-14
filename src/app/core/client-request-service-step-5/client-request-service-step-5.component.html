@@ -79,18 +79,21 @@
     <div class="d-flex justify-content-evenly align-items-center flex-wrap" *ngIf="selectedFrequency">
         <app-calendar *ngIf="selectedFrequency" [frequency]="dateTime" (dateTimeSelected)="updateFrequency($event)"></app-calendar>
         <div *ngIf="dateTime">
-            <p>Frequency: {{ dateTime.frequency }}</p>
+            <p class="font_big">Frequency: {{ dateTime.frequency }}</p>
 
-            <p *ngIf="dateTime.frequency == 'one_time' ">Selected date: {{ dateTime.date | date: 'fullDate' }}</p>
-            <p *ngIf="dateTime.frequency == 'every_two_weeks' || dateTime.frequency == 'weekly' ">Selected day: {{
-                dateTime.date | date: 'EEEE' }}</p>
-            <p *ngIf="dateTime.frequency == 'monthly'">
-                Selected week: {{ dateTime.date ? dateTime.week : '' }}
-            </p>
-            <p *ngIf="dateTime.frequency == 'monthly'">
+            <p class="font_big" *ngIf="dateTime.frequency == 'one_time' ">Selected date: {{ dateTime.date | date: 'fullDate' }}</p>
+            <p class="font_big" *ngIf="dateTime.frequency == 'every_two_weeks' || dateTime.frequency == 'weekly' ">
                 Selected day: {{ dateTime.date | date: 'EEEE' }}
             </p>
-            <p>Selected hour: {{ dateTime.time }}</p>
+            <p class="font_big" *ngIf="dateTime.frequency == 'monthly'">
+                Selected week: {{ dateTime.date ? dateTime.week : '' }}
+            </p>
+            <p class="font_big" *ngIf="dateTime.frequency == 'monthly'">
+                Selected day: {{ dateTime.date | date: 'EEEE' }}
+            </p>
+            <p class="font_big">
+                Selected hour: {{ dateTime.time }}
+            </p>
         </div>
 
     </div>
