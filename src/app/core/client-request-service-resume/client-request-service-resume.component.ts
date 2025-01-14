@@ -143,6 +143,6 @@ export class ClientRequestServiceResumeComponent implements OnInit {
       } else {
         console.error("stripeUrl no está definido");
       }
-    }, 2000);
+    }, 500);
   }
 }
