@@ -17,6 +17,8 @@ export class ClientRequestServiceStep2Component implements OnInit {
     email: new FormControl('', Validators.required),
     phone: new FormControl('', Validators.required),
     address: new FormControl('', Validators.required),
+    address_1: new FormControl(''),
+    zip_code: new FormControl('', Validators.required),
   });
 
   ngOnInit(): void {

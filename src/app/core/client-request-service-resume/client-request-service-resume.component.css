@@ -7,6 +7,13 @@
     margin-bottom: 1rem;
 }
 
+.list {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
 ul {
     list-style-image: url('/icons/check.svg');
 }
@@ -18,9 +25,14 @@ ul {
     width: 100%;
 }
 
+.help-container {
+    width: 100%;
+}
+
 .price {
     text-align: center;
     padding-top: 3rem;
+    width: 100%;
 }
 
 

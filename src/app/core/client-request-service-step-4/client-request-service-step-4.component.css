@@ -24,3 +24,8 @@
     fill: var(--secondary-green);
     /* fill: var(--primary-green); */
 }
+
+.skip {
+    background-color: var(--primary-green);
+    color: var(--neutral-gray-light);
+}

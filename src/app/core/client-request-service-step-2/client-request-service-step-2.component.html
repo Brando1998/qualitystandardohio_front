@@ -5,20 +5,28 @@
     </div>
     <form [formGroup]="step2Form">
         <div class="form-group">
-            <label for="name">Name</label>
+            <label for="name">Name*</label>
             <input type="text" name="name" id="name" formControlName="name">
         </div>
         <div class="form-group">
-            <label for="email">Email</label>
+            <label for="email">Email*</label>
             <input type="text" name="email" id="email" formControlName="email">
         </div>
         <div class="form-group">
-            <label for="phone">Phone</label>
+            <label for="phone">Phone*</label>
             <input type="text" name="phone" id="phone" formControlName="phone">
         </div>
         <div class="form-group">
-            <label for="address">Address</label>
+            <label for="zip_code">ZIP_code Code*</label>
+            <input type="text" name="zip_code" id="zip_code" formControlName="zip_code">
+        </div>
+        <div class="form-group">
+            <label for="address">Service Address*</label>
             <input type="text" name="address" id="address" formControlName="address">
+        </div>
+        <div class="form-group">
+            <label for="address_1">Apartment/Suite (optional)</label>
+            <input type="text" name="address_1" id="address_1" formControlName="address_1">
         </div>
     </form>
     <div class="d-flex align-items-center justify-content-center button-container">
