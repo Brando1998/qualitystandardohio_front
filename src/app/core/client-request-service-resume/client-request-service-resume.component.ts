@@ -39,7 +39,7 @@ export class ClientRequestServiceResumeComponent implements OnInit {
     this.step2 = JSON.parse(this.resume.step2)
     this.step3 = JSON.parse(this.resume.step3)
     this.step4 = JSON.parse(this.resume.step4)
-    
+
     if (this.stepData) {
       const stepData = JSON.parse(this.stepData)
       this.step6Form.setValue(stepData)
@@ -63,14 +63,14 @@ export class ClientRequestServiceResumeComponent implements OnInit {
 
   mergeDeserializedData(data: Record<string, string>) {
     const mergedData = {};
-  
+
     for (const key in data) {
       if (data.hasOwnProperty(key)) {
         // Parse each JSON string and merge into the mergedData object
         Object.assign(mergedData, JSON.parse(data[key]));
       }
     }
-  
+
     return mergedData;
   }
 
@@ -90,6 +90,10 @@ export class ClientRequestServiceResumeComponent implements OnInit {
       email: data.email,
       phone: data.phone,
       address: data.address,
+      address_1: data.address_1,
+      zip_code: data.zip_code,
+      state: data.state,
+      city: data.city,
       accept_terms: data.acceptTerms, // Cambia a snake_case
       notes: this.step6Form.controls.notes.value
     };
@@ -104,12 +108,12 @@ export class ClientRequestServiceResumeComponent implements OnInit {
       next: (r) => {
         console.log('Order response:', r);
         this.stripeUrl = r.setup_url;
-        this.isLoading = false; 
+        this.isLoading = false;
         this.redirectToStripe()
       },
       error: (e) => {
         console.error('Order error:', e);
-        this.isLoading = false; 
+        this.isLoading = false;
       }
     });
   }
