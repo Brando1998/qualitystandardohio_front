@@ -109,7 +109,7 @@ export class ClientRequestServiceResumeComponent implements OnInit {
         console.log('Order response:', r);
         this.stripeUrl = r.setup_url;
         this.isLoading = false;
-        // this.redirectToStripe()
+        this.redirectToStripe()
       },
       error: (e) => {
         console.error('Order error:', e);
