@@ -70,3 +70,7 @@ textarea {
     background-color: #ccc;
     cursor: not-allowed;
 }
+.next-step:hover {
+    background-color: var(--primary-green) !important;
+    color: white !important;
+}
