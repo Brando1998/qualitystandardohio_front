@@ -73,4 +73,5 @@ textarea {
 .next-step:hover {
     background-color: var(--primary-green) !important;
     color: white !important;
+    text-align: center;
 }
