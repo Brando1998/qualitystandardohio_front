@@ -4,11 +4,11 @@ const path = require("path");
 const app = express();
 
 // Servir archivos estáticos desde la carpeta dist
-app.use(express.static(path.join(__dirname, "dist/mi-proyecto-angular")));
+app.use(express.static(path.join(__dirname, "dist/front_qualitystandardohio/browser")));
 
 // Manejar rutas de Angular
 app.get("/*", (req, res) => {
-  res.sendFile(path.join(__dirname, "dist/mi-proyecto-angular/index.html"));
+  res.sendFile(path.join(__dirname, "dist/front_qualitystandardohio/browser/index.html"));
 });
 
 // Configurar el puerto de Heroku
