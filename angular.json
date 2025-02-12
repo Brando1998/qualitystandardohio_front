@@ -52,14 +52,14 @@
               ],
               "outputHashing": "all"
             },
-            "development": {
+            "prod": {
               "optimization": false,
               "extractLicenses": false,
               "sourceMap": true,
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.development.ts"
+                  "with": "src/environments/environment.prod.ts"
                 }
               ]
             },
@@ -83,14 +83,14 @@
             "production": {
               "buildTarget": "front_qualitystandardohio:build:production"
             },
-            "development": {
-              "buildTarget": "front_qualitystandardohio:build:development"
+            "prod": {
+              "buildTarget": "front_qualitystandardohio:build:prod"
             },
             "local": {
               "buildTarget": "front_qualitystandardohio:build:local"
             }
           },
-          "defaultConfiguration": "development"
+          "defaultConfiguration": "prod"
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n"
