@@ -107,7 +107,7 @@ export class ClientRequestServiceResumeComponent implements OnInit {
     this.clientService.placeOrder(this.formData).subscribe({
       next: (r) => {
         console.log('Order response:', r);
-        this.stripeUrl = r.setup_url;
+        this.stripeUrl = r.url;
         this.isLoading = false;
         this.redirectToStripe()
       },
