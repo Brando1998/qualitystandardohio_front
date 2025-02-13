@@ -79,7 +79,7 @@
     <div class="d-flex justify-content-evenly align-items-center flex-wrap" *ngIf="selectedFrequency">
         <app-calendar *ngIf="selectedFrequency" [frequency]="dateTime" (dateTimeSelected)="updateFrequency($event)"></app-calendar>
         <div *ngIf="dateTime">
-            <p class="font_big">Frequency: {{ dateTime.frequency }}</p>
+            <p *ngIf="dateTime.frequency" class="font_big">Frequency: {{ dateTime.frequency| formatText }}</p>
 
             <p class="font_big" *ngIf="dateTime.frequency == 'one_time' ">Selected date: {{ dateTime.date | date: 'fullDate' }}</p>
             <p class="font_big" *ngIf="dateTime.frequency == 'every_two_weeks' || dateTime.frequency == 'weekly' ">

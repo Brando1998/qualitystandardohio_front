@@ -2,6 +2,7 @@ import { DatePipe, NgClass, NgIf } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { CalendarComponent } from '../calendar/calendar.component';
+import { FormatTextPipe } from '../../utilities/format-text.pipe';
 
 @Component({
   selector: 'app-client-request-service-step-5',
@@ -10,7 +11,8 @@ import { CalendarComponent } from '../calendar/calendar.component';
     NgIf,
     CalendarComponent,
     DatePipe,
-    NgClass
+    NgClass, 
+    FormatTextPipe
   ],
   templateUrl: './client-request-service-step-5.component.html',
   styleUrl: './client-request-service-step-5.component.css'
